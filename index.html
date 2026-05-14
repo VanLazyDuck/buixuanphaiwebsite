@@ -2,10 +2,45 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <title>Website giới thiệu Bùi Xuân Phái</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bùi Xuân Phái</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f1ea;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      background: #3b2f2f;
+      color: white;
+    }
+
+    .pdf-container {
+      width: 100%;
+      height: calc(100vh - 90px);
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Xin chào!</h1>
-  <p>Đây là website giới thiệu Bùi Xuân Phái của nhóm Lê Vy, Phương Mai, Y Li, Bùi Nhật Nam, Như Hiếu</p>
+  <header>
+    <h1>Bùi Xuân Phái</h1>
+  </header>
+
+  <div class="pdf-container">
+    <iframe
+      src="https://drive.google.com/file/d/1EzwkCHl0Z_3PhHPaWrw1Zg-ihISZir7E/view?usp=sharing"
+      allow="autoplay">
+    </iframe>
 </body>
 </html>
