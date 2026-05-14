@@ -3,9 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bùi Xuân Phái</title>
+  <title>Họa sĩ Bùi Xuân Phái</title>
 
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -13,15 +17,54 @@
     }
 
     header {
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
       padding: 20px;
       background: #3b2f2f;
       color: white;
     }
 
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    .header-buttons {
+      position: absolute;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .back-to-top,
+    .like-btn {
+      padding: 10px 16px;
+      background: #f4f1ea;
+      color: #3b2f2f;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .back-to-top:hover,
+    .like-btn:hover {
+      background: #e2d6c3;
+    }
+
+    .like-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
     .pdf-container {
       width: 100%;
-      height: calc(100vh - 90px);
+      height: calc(100vh - 150px);
     }
 
     iframe {
@@ -29,18 +72,68 @@
       height: 100%;
       border: none;
     }
+
+    footer {
+      text-align: center;
+      padding: 18px;
+      background: #3b2f2f;
+      color: white;
+      font-size: 16px;
+    }
   </style>
 </head>
 
-<body>
+<body id="top">
   <header>
-    <h1>Bùi Xuân Phái</h1>
+    <h1>Họa sĩ Bùi Xuân Phái</h1>
+
+    <div class="header-buttons">
+      <button class="like-btn" id="likeBtn" onclick="handleLike()">
+        👍 Like <span id="likeCount">0</span>
+      </button>
+
+      <a href="#top" class="back-to-top">Back to top</a>
+    </div>
   </header>
 
   <div class="pdf-container">
-    <iframe
+    <iframe 
       src="https://drive.google.com/file/d/1EzwkCHl0Z_3PhHPaWrw1Zg-ihISZir7E/preview"
       allow="autoplay">
     </iframe>
+  </div>
+
+  <footer>
+    Nhóm thực hiện: Lê Vy, Phương Mai, Y Li, Bùi Nhật Nam, Như Hiếu.
+  </footer>
+
+  <script>
+    const likeBtn = document.getElementById("likeBtn");
+    const likeCount = document.getElementById("likeCount");
+
+    let count = localStorage.getItem("likeCount") || 0;
+    likeCount.textContent = count;
+
+    function handleLike() {
+      const now = Date.now();
+      const lastLikeTime = localStorage.getItem("lastLikeTime");
+      const fiveMinutes = 5 * 60 * 1000;
+
+      if (lastLikeTime && now - lastLikeTime < fiveMinutes) {
+        const timeLeft = Math.ceil((fiveMinutes - (now - lastLikeTime)) / 1000);
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+
+        alert(`Bạn chỉ có thể like 1 lần mỗi 5 phút. Vui lòng thử lại sau ${minutes} phút ${seconds} giây.`);
+        return;
+      }
+
+      count++;
+      likeCount.textContent = count;
+
+      localStorage.setItem("likeCount", count);
+      localStorage.setItem("lastLikeTime", now);
+    }
+  </script>
 </body>
 </html>
