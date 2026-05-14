@@ -117,14 +117,13 @@
     function handleLike() {
       const now = Date.now();
       const lastLikeTime = localStorage.getItem("lastLikeTime");
-      const fiveMinutes = 5 * 60 * 1000;
+      const thirtySecs = 30 * 1000;
 
-      if (lastLikeTime && now - lastLikeTime < fiveMinutes) {
-        const timeLeft = Math.ceil((fiveMinutes - (now - lastLikeTime)) / 1000);
-        const minutes = Math.floor(timeLeft / 60);
+      if (lastLikeTime && now - lastLikeTime < thirtySecs) {
+        const timeLeft = Math.ceil((thirtySecs - (now - lastLikeTime)) / 1000);
         const seconds = timeLeft % 60;
 
-        alert(`Bạn chỉ có thể like 1 lần mỗi 5 phút. Vui lòng thử lại sau ${minutes} phút ${seconds} giây.`);
+        alert(`Bạn chỉ có thể like 1 lần mỗi 30 giây. Vui lòng thử lại sau ${seconds} giây.`);
         return;
       }
 
