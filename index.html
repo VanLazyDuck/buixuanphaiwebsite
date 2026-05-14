@@ -92,12 +92,15 @@
         👍 Like <span id="likeCount">0</span>
       </button>
 
-      <a href="#top" class="back-to-top">Back to top</a>
+      <button class="back-to-top" onclick="goToFirstPage()">
+        Back to top
+      </button>    
     </div>
   </header>
 
   <div class="pdf-container">
     <iframe 
+      id="pdfFrame"
       src="https://drive.google.com/file/d/1EzwkCHl0Z_3PhHPaWrw1Zg-ihISZir7E/preview"
       allow="autoplay">
     </iframe>
@@ -132,6 +135,13 @@
 
       localStorage.setItem("likeCount", count);
       localStorage.setItem("lastLikeTime", now);
+    }
+
+    function goToFirstPage() {
+      const pdfFrame = document.getElementById("pdfFrame");
+      const pdfLink = "https://drive.google.com/file/d/FILE_ID/preview";
+
+      pdfFrame.src = pdfLink;
     }
   </script>
 </body>
